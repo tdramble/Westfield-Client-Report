@@ -419,10 +419,10 @@ public class WestfieldClientReportView extends FrameView {
                         Logger.getLogger(WestfieldClientReportView.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                    PDPage templatepage = (PDPage) document.getDocumentCatalog().getAllPages().get(0);
 
                     int n = 1;
                     while (missingPrimaryKeys.size() > 40 * n) {
+                        PDPage templatepage = (PDPage) document.getDocumentCatalog().getAllPages().get(n-1);
                         n++;
                         document.importPage(templatepage);
                     }
@@ -462,7 +462,7 @@ public class WestfieldClientReportView extends FrameView {
                         contentStream.setNonStrokingColor(java.awt.Color.black);
 
                         for (int j = 0; 0 < missingPrimaryKeys.size() && j < 40; j++) {
-                            setProgress(count/finish);
+                            setProgress(count / finish);
                             String[] change = missingPrimaryKeys.remove(0);
 
                             contentStream.moveTextPositionByAmount(0, -14);
